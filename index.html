@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS-only Clock</title>
+    <style>@import "clock.css";</style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script>
+    /* Set current time */
+    $(function($){
+        var now = new Date(),
+            hour = now.getHours(),
+            minute = now.getMinutes(),
+            second = now.getSeconds();
+
+        if ( $.browser.webkit ) {
+            var offset = {
+                hours  : hour * 3600 + minute * 60 + second - 1,
+                minutes: minute * 60 + second - 1,
+                seconds: second - 1
+            };
+
+            $("#hour").css('-webkit-animation-delay', (offset.hours   * -1) + "s");
+            $("#min") .css('-webkit-animation-delay', (offset.minutes * -1) + "s");
+            $("#sec") .css('-webkit-animation-delay', (offset.seconds * -1) + "s");
+        }
+        else {
+            var rotate = {
+                hours  : (hour * 60 + minute) * 360 / 720,
+                minutes: minute * 360 / 60,
+                seconds: second * 360 / 60
+            };
+
+            if ( $.browser.mozilla ) {
+                $("#hour").css('-moz-transform', 'rotate(' + rotate.hours   + 'deg)');
+                $("#min") .css('-moz-transform', 'rotate(' + rotate.minutes + 'deg)');
+                $("#sec") .css('-moz-transform', 'rotate(' + rotate.seconds + 'deg)');
+            }
+
+            if ( $.browser.opera ) {
+                $("#hour").css('-o-transform', 'rotate(' + rotate.hours   + 'deg)');
+                $("#min") .css('-o-transform', 'rotate(' + rotate.minutes + 'deg)');
+                $("#sec") .css('-o-transform', 'rotate(' + rotate.seconds + 'deg)');
+            }
+        }
+    });
+    </script>
+  </head>
+  <body>
+    <h1>CSS-only Clock</h1>
+
+    <div id="clock">
+      <div id="hour" class="hand"></div>
+      <div id="min" class="hand"></div>
+      <div id="sec" class="hand"></div>
+
+      <div id="indicators">
+        <!-- div*60 -->
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+
+    <div id="info">
+      <p>
+        Proof of concept for a <strong>CSS-only clock</strong>. Currently best viewed with
+        <a href="http://google.com/chrome/" title="Get Chrome" target="_blank">Google Chrome</a> or
+        <a href="http://apple.com/safari/" title="Get Safari" target="_blank">Safari</a>.
+        Firefox and Opera users will see a static clock and everyone else gets
+        <a href="ie8.png" title="How this looks like in IE8">something funny</a>.
+      </p>
+      <p>
+        <cite>made by <a href="http://julianwachholz.ch/">Julian Wachholz</a></cite>
+      </p>
+    </div>
+
+    <script>
+      var _gaq=[['_setAccount','UA-16722648-1'],['_trackPageview']];
+      (function(d,t){
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=true;
+        g.src=('https:'==location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s);
+      })(document,'script');
+    </script>
+  </body>
+</html>
