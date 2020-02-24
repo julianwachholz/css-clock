@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>CSS-only Clock</title>
     <style>@import "clock.css";</style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script>
     /* Set current time */
     $(function($){
@@ -13,36 +13,15 @@
             minute = now.getMinutes(),
             second = now.getSeconds();
 
-        if ( $.browser.webkit ) {
-            var offset = {
-                hours  : hour * 3600 + minute * 60 + second - 1,
-                minutes: minute * 60 + second - 1,
-                seconds: second - 1
-            };
+        var offset = {
+            hours  : hour * 3600 + minute * 60 + second - 1,
+            minutes: minute * 60 + second - 1,
+            seconds: second - 1
+        };
 
-            $("#hour").css('-webkit-animation-delay', (offset.hours   * -1) + "s");
-            $("#min") .css('-webkit-animation-delay', (offset.minutes * -1) + "s");
-            $("#sec") .css('-webkit-animation-delay', (offset.seconds * -1) + "s");
-        }
-        else {
-            var rotate = {
-                hours  : (hour * 60 + minute) * 360 / 720,
-                minutes: minute * 360 / 60,
-                seconds: second * 360 / 60
-            };
-
-            if ( $.browser.mozilla ) {
-                $("#hour").css('-moz-transform', 'rotate(' + rotate.hours   + 'deg)');
-                $("#min") .css('-moz-transform', 'rotate(' + rotate.minutes + 'deg)');
-                $("#sec") .css('-moz-transform', 'rotate(' + rotate.seconds + 'deg)');
-            }
-
-            if ( $.browser.opera ) {
-                $("#hour").css('-o-transform', 'rotate(' + rotate.hours   + 'deg)');
-                $("#min") .css('-o-transform', 'rotate(' + rotate.minutes + 'deg)');
-                $("#sec") .css('-o-transform', 'rotate(' + rotate.seconds + 'deg)');
-            }
-        }
+        $("#hour").css('animation-delay', (offset.hours   * -1) + "s");
+        $("#min") .css('animation-delay', (offset.minutes * -1) + "s");
+        $("#sec") .css('animation-delay', (offset.seconds * -1) + "s");
     });
     </script>
   </head>
@@ -77,13 +56,13 @@
     <div id="info">
       <p>
         Proof of concept for a <strong>CSS-only clock</strong>. Currently best viewed with
-        <a href="http://google.com/chrome/" title="Get Chrome" target="_blank">Google Chrome</a> or
-        <a href="http://apple.com/safari/" title="Get Safari" target="_blank">Safari</a>.
+        <a href="https://google.com/chrome/" title="Get Chrome" target="_blank">Google Chrome</a> or
+        <a href="https://apple.com/safari/" title="Get Safari" target="_blank">Safari</a>.
         Firefox and Opera users will see a static clock and everyone else gets
         <a href="ie8.png" title="How this looks like in IE8">something funny</a>.
       </p>
       <p>
-        <cite>made by <a href="http://julianwachholz.ch/">Julian Wachholz</a></cite>
+        <cite>made by <a href="https://ju.io/">Julian Wachholz</a></cite>
       </p>
     </div>
   </body>
